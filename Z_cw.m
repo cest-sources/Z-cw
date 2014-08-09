@@ -80,7 +80,7 @@ end
 
 function [Rex_MT, R1obs]=Rex_MT_1(da,w1,R1A,R2A,dc,fc,kca,R1C,R2C,MT_lineshape)
 
-warning(' MT i not implemeneted yet, it will be updated as soon as our paper is accepted');
+warning(' MT is not implemeneted yet, it will be updated as soon as our paper is accepted');
 Rex_MT=0; 
 
 
