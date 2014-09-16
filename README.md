@@ -5,7 +5,7 @@ Z-cw
 - load the whole folder into the matlab path
 - run sections step by step
 - first section: set up the parameters truct P. P contains all system and sequence parameters.
-- second section: call and plot Z_cw_2pool(P), it calculates the Z-spectrum and returns it as a vector.
+- second section: call and plot Z_cw(P), it calculates the Z-spectrum and returns it as a vector.
 - third section: Call and plot for multiple parameters
 
 
