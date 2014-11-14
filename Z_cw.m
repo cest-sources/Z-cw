@@ -1,4 +1,10 @@
 % 2pool cw-solution for Z-spectra
+%   Date: 2014/08/01 
+%   Version for CEST-sources.de
+%   Author: Moritz Zaiss  - m.zaiss@dkfz.de
+%   Divison of Medical Physics in Radiology
+%   German Cancer Research Center (DKFZ), Heidelberg, Germany , http://www.dkfz.de/en/index.html
+%   CEST sources - Copyright (C) 2014  Moritz Zaiss
 
 %   **********************************
 %   This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by
@@ -12,10 +18,6 @@
 % P= struct of system and sequence parameters
 % xZspec = frequency offsets in ppm
 % returns vector Z(xZspec)
-
-%   Author: Moritz Zaiss  - m.zaiss@dkfz.de
-%   Date: 2014/07/25
-%   Version for cest sources
 
 function Z=Z_cw(P)
 
@@ -80,8 +82,21 @@ end
 
 function [Rex_MT, R1obs]=Rex_MT_1(da,w1,R1A,R2A,dc,fc,kca,R1C,R2C,MT_lineshape)
 
-warning(' MT i not implemeneted yet, it will be updated as soon as our paper is accepted');
-Rex_MT=0; 
+    theta   = atan(w1./da);
+    Reff=R1A*cos(theta).^2 +R2A*sin(theta).^2;
+    kac=kca*fc;
+    
+    
+    r1a     = R1A-Reff;
+    r2a     = R2A-Reff;
+    r1c     = R1C-Reff;
+    rfmt    = RF_MT(1/R2C,w1,dc,MT_lineshape);
+    
+    Rex_MT =    (((da.^2 + r2a.^2).*(kca.*r1a + (kac + r1a).*(r1c + rfmt)) + ...
+        r2a.*(kca + r1c + rfmt).*w1.^2)./(da.^2.*(kac + kca + r1a + r1c + rfmt) + ...
+        r2a.*(kca.*(2.*r1a + r2a) + r2a.*(r1c + rfmt) + ...
+        kac.*(2.*r1c + r2a + 2.*rfmt) + ...
+        r1a.*(2.*r1c + r2a + 2.*rfmt)) + (kca + r1c + r2a + rfmt).*w1.^2));
 
 
 R1obs =    0.5*( kac + kca + R1A+ R1C - sqrt(( kac + kca + R1A + R1C )^2 - 4*( kca*R1A + kac*R1C + R1A*R1C )));
