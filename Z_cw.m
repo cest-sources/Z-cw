@@ -19,7 +19,7 @@
 % xZspec = frequency offsets in ppm
 % returns vector Z(xZspec)
 
-function Z=Z_cw(P)
+function [Z ,Rex, Reff, Rex_MT]=Z_cw(P)
 
 w_ref=2*pi*P.FREQ;                  % reference frequency in rad/s
 gamma=267.5153;                     % for protons

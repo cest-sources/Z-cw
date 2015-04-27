@@ -49,7 +49,7 @@ clc
     P.FREQ=300;             % static B0 field [MHz] ~7T ; ppm and µT are used for offsets and B1, therefore gamma=267.5153 is given in Hz.
     P.B1=1;                 % irradiation amplitude [µT]
     P.tp=80;                % pulse duration = saturation time [s]
-    P.xZspec= [-30:0.1:30];   % chemical shift of the CEST pool in [ppm] 
+    P.xZspec= [-4:0.01:4];   % chemical shift of the CEST pool in [ppm] 
 
     Pstart=P;
     
@@ -66,23 +66,23 @@ Pref.fB=0;                  % reference: Z of system without CEST pool
 plot(P.xZspec,Z_cw(Pref)-Z_cw(P),'r.-') ;   hold on; legend({'Z','Z_{ref}-Z'})
 
 % PLOT relaxation-compensated CEST: AREX
-% theta=atan(P.B1*267.5153./((P.xZspec-P.dwA)*2*pi*P.FREQ));
-% plot(P.xZspec,cos(theta).^2.*(P.R1A+P.fC*P.R1C).*(1./Z_cw(P)-1./Z_cw(Pref)),'g.-') ;   hold on;
-% legend({'Z','Z_{ref}-Z','AREX'})
+ theta=atan(P.B1*267.5153./((P.xZspec-P.dwA)*2*pi*P.FREQ));
+ plot(P.xZspec,cos(theta).^2.*(P.R1A+P.fC*P.R1C).*(1./Z_cw(P)-1./Z_cw(Pref)),'g.-') ;   hold on;
+ legend({'Z','Z_{ref}-Z','AREX'})
 
 %% vary a parameter
-vary=[ 2 3 4 5 6]; % define value range for variation
+vary=[ 10 20 50 ]; % define value range for variation
 
 for ii=1:numel(vary)
     P=Pstart;       % reset previous changes
-    P.B1=vary(ii);  % define which parameter you want to vary
+    P.R2A=vary(ii);  % define which parameter you want to vary
     
     figure(2), plot(P.xZspec,Z_cw(P),'.-','Color',cl(ii,numel(vary))) ;   hold on;
     
     Pref=P;    Pref.fB=0; %Pref.xZspec=-P.xZspec; %
     plot(P.xZspec,Z_cw(Pref)-Z_cw(P),'*-','Color',cl(ii,numel(vary))) ;   hold on;
   % PLOT relaxation-compensated CEST: AREX
-  %  plot(P.xZspec,cos(theta).^2.*(P.R1A+P.fC*P.R1C).*(1./Z_cw(P)-1./Z_cw(Pref)),'d-','Color',cl(ii,numel(vary))) ;   hold on;
+    plot(P.xZspec,cos(theta).^2.*(P.R1A+P.fC*P.R1C).*(1./Z_cw(P)-1./Z_cw(Pref)),'d-','Color',cl(ii,numel(vary))) ;   hold on;
     
 end;
 set(gca,'XDir','reverse'); xlabel('\Delta\omega [ppm]'); ylabel('Z(\Delta\omega)'); set(gca,'yLim',[0 1]);

@@ -16,9 +16,9 @@
 %   Z_cw_2pool(P) calculates the Z-spectrum and returns it as a vector.
 %
 %   --references--:
-%               2-pool-cw:      Zaiss et al. JCP, Zaiss and Bachert NBM      
-%               3-pool-cw:      Zaiss et al. NBM    
-%               2-pool-plsd SL: Roeloffs et al. NBM 
+%   2-pool-cw:      Zaiss and Bachert. NBM 2013;26(5):507–18. doi:10.1002/nbm.2887   and Zaiss et al JCP 2012;136:144106. doi:10.1063/1.3701178     
+%   3-pool-cw:      Zaiss et al. NBM 2015 Feb;28(2):217-30. doi: 10.1002/nbm.3237.   
+%   2-pool-pulsd SL: Roeloffs et al. NBM 2014; 28, 40–53, doi: 10.1002/nbm.3192.
 
 %% SETUP
 clearvars P Pref Pstart
@@ -57,7 +57,7 @@ Pref.fB=0;                  % reference: Z of system without CEST pool
 %Pref.xZspec=-P.xZspec;     % reference: Z of opposite frequency
 plot(P.xZspec,Z_cw(Pref)-Z_cw(P),'r.-') ;   hold on; legend({'Z','Z_{ref}-Z'})
 
-% PLOT clean CEST: AREX
+% PLOT relaxation-compensated CEST: AREX
 % theta=atan(P.B1*267.5153./((P.xZspec-P.dwA)*2*pi*P.FREQ));
 % plot(P.xZspec,cos(theta).^2.*(1./Z_cw(P)-1./Z_cw(Pref)),'g.-') ;   hold on;
 % legend({'Z','Z_{ref}-Z','AREX'})
@@ -73,7 +73,7 @@ for ii=1:numel(vary)
     
     Pref=P;    Pref.fB=0; %Pref.xZspec=-P.xZspec; %
     plot(P.xZspec,Z_cw(Pref)-Z_cw(P),'*-','Color',cl(ii,numel(vary))) ;   hold on;
+  % PLOT relaxation-compensated CEST: AREX
   %  plot(P.xZspec,cos(theta).^2.*(1./Z_cw(P)-1./Z_cw(Pref)),'d-','Color',cl(ii,numel(vary))) ;   hold on;
-    
 end;
 set(gca,'XDir','reverse'); xlabel('\Delta\omega [ppm]'); ylabel('Z(\Delta\omega)'); set(gca,'yLim',[0 1]);
