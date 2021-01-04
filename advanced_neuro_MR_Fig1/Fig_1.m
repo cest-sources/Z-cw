@@ -15,7 +15,7 @@
 %   --SHORT  DOC--
 % Figure 1 from the bookchapter Advanced Neuro MRI
 % Amide pool in a water and MT environment reflecting white brain matter
-
+% parameters taken from Table 1 in the same chapter
 
 %% SETUP
 clearvars P Pref Pstart
@@ -27,17 +27,17 @@ clc
     P.dwA=0;            % chemical shift of the water pool in [ppm] 
 
     % CEST pool 'b'
-    P.fB=0.00156;     % proton fraction fB=M0B/M0A, e.g. 50mM creatine in water:  4*50/(2*55.5*1000)=0.0018018;
-    P.kBA=165;            % exchange rate [s^-1]     % corresponds to creatine at ~ 22°C, pH=6.4 in PBS (Goerke et al.)
+    P.fB=0.00156;     % proton fraction fB=M0B/M0A, WM value from Table 1  (e.g. 50mM creatine in water:  4*50/(2*55.5*1000)=0.0018018;)
+    P.kBA=165;            % exchange rate [s^-1]     WM value from Table 1 
     P.dwB=3.5;          % chemical shift of the CEST pool in [ppm] 
-    P.R2B=73.1;           % transversal relaxation rate 1/T2 of pool b  [s^-1]  1/0.01368s
+    P.R2B=73.1;           % transversal relaxation rate 1/T2 of pool b  [s^-1]  1/0.01368s, WM value from Table 1 
     P.R1B=1;            % longitudinal relaxation rate 1/T1 of pool b  [s^-1] 
 
     % % semi-solid MT pool 'c'
-    P.fC=0.11;               % proton fraction of the semi-solid pool (WM-like)
-    P.kCA=25;                 % exchange rate [s^-1]
+    P.fC=0.11;               % proton fraction of the semi-solid pool (WM-like) WM value from Table 1 
+    P.kCA=25;                 % exchange rate [s^-1] WM value from Table 1 
     P.dwC=0;                 % deltaW_B in [ppm} (chemical shift)
-    P.R2C=1/(20.48*10^-6);      % transversal relaxation rate 1/T2 of pool c [s^-1]
+    P.R2C=1/(20.48*10^-6);      % transversal relaxation rate 1/T2 of pool c [s^-1] WM value from Table 1 
     P.R1C=1;                  % longitudinal relaxation rate 1/T1 of pool c [s^-1]
     P.MT_lineshape='SuperLorentzian';            % semi-solid Lineshape
 
