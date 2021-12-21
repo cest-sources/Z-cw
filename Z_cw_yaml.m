@@ -48,11 +48,13 @@ if isfield(Psim,'MTPool')
     if Psim.MTPool.f>0
         [Rex_MT, R1obs]=Rex_MT_1(da,w1,Psim.WaterPool.R1,Psim.WaterPool.R2,(P.xZspec-Psim.MTPool.dw)*w_ref,Psim.MTPool.f,Psim.MTPool.k,Psim.MTPool.R1,Psim.MTPool.R2,Psim.MTPool.Lineshape);
     end
+else
+    Psim.MTPool.f=0;
 end
 %% Superposition of R1p
 % this line creates the multi-pool system
 %       water +     MT   +   CEST
-R1p  =  Reff +   Rex_MT +   Rex_n/(1+P.fC); % altered according to NBM 2014
+R1p  =  Reff +   Rex_MT +   Rex_n/(1+Psim.MTPool.f); % altered according to NBM 2014
 
 
 Pz=cos(theta);    % for cw   ; Pz=1;    % for SL
