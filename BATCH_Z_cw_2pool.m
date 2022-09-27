@@ -63,7 +63,7 @@ plot(P.xZspec,Z_cw(Pref)-Z_cw(P),'r.-') ;   hold on; legend({'Z','Z_{ref}-Z'})
 % legend({'Z','Z_{ref}-Z','AREX'})
 
 %% vary a parameter
-vary=[ 2 3 4 5 6]; % define value range for variation
+vary=[ 2 3 4 5 6]; % define value range for variation, e.g. used  for B1 or tp
 
 for ii=1:numel(vary)
     P=Pstart;       % reset previous changes
