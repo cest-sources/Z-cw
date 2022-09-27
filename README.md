@@ -11,7 +11,7 @@ Z-cw
 
 Date: 2014/08/01 
 Version for CEST-sources.de
-uthor: Moritz Zaiss  - m.zaiss@dkfz.de
+author: Moritz Zaiss  - m.zaiss@fau.de
 Divison of Medical Physics in Radiology
 German Cancer Research Center (DKFZ), Heidelberg Germany, http://www.dkfz.de/en/index.html
  CEST sources - Copyright (C) 2014  Moritz Zaiss
