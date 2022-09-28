@@ -2,7 +2,7 @@
 %% analytic Z-spectra
 %   Date: 2014/08/01 
 %   Version for CEST-sources.de
-%   Author: Moritz Zaiss  - moritz.zaiss@uk-erlangen.de
+%   Author: Moritz Zaiss  - moritz.zaiss@fau.de
 %   CEST sources  Copyright (C) 2020  Moritz Zaiss
 %   **********************************
 %   This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by
