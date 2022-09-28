@@ -13,8 +13,8 @@ Date: 2014/08/01
 Version for CEST-sources.de
 Author: Moritz Zaiss  - m.zaiss@fau.de
 Institute of Neuroradiology
-German Cancer Research Center (DKFZ), Heidelberg Germany, http://www.dkfz.de/en/index.html
- CEST sources - Copyright (C) 2014  Moritz Zaiss
+https://www.mr-physik.med.fau.de/ag-zaiss/
+CEST sources - Copyright (C) 2014  Moritz Zaiss
 **********************************
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or(at your option) any later version.
