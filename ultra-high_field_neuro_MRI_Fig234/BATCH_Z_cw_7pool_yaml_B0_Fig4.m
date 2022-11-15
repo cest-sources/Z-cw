@@ -51,7 +51,7 @@ P.xZspec= [-6:0.05:6];   % chemical shift of the CEST pool in [ppm]
 
 Pstart=P;
 
-vary=[123 300 400 ]; % define value range for variation
+vary=[66 123 300 400 ]; % define value range for variation
 
 for ii=1:numel(vary)
     
@@ -66,5 +66,5 @@ for ii=1:numel(vary)
 end
 set(gca,'XDir','reverse'); xlabel('\Delta\omega [ppm]'); ylabel('CESTR(\Delta\omega)'); set(gca,'yLim',[0 0.07]);
 set(gca,'xLim',[-6 6]);
-legend(strsplit(sprintf('B_0 = %.1f T;',[3 7 9.4]),';'),'FontSize',8)
+legend(strsplit(sprintf('B_0 = %.1f T;',[1.5 3 7 9.4]),';'),'FontSize',8)
 

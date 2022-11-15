@@ -31,8 +31,8 @@
 clearvars P Pref Pstart
 clc
 
-% bmsimfile='WM_3T_Stanisz2005_5pool_bmsim.yaml';
-bmsimfile='WM_3T_Wang2020_5pool_bmsim.yaml';
+% bmsimfile='Stanisz_3T/WM_3T_Stanisz2005_5pool_bmsim.yaml';
+bmsimfile='Wang_3T/WM_3T_Wang2020_5pool_bmsim.yaml';
 
 Psim = readSimulationParameters([pulseqCEST_simlib bmsimfile]);
 

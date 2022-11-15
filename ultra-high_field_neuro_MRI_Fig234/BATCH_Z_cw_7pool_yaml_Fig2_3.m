@@ -24,9 +24,9 @@ else
     cd pulseq-cest;
     install_pulseqcest;
     cd ..
-    pulseqCEST_simlib=[pwd '/pulseq-cest-library/sim-library/'];
 end
-
+pulseqCEST_simlib=[uigetdir(pwd,'Select the pulseq-sim library folder') '/sim-library/'];
+    
 %% SETUP
 clearvars P Pref Pstart
 clc
@@ -95,11 +95,26 @@ legend(strsplit(sprintf('B_1 = %.2f µT;',vary),';'),'FontSize',8)
 legend('Location','NorthEastOutside')
 %% alpha(B1,B0) verläufe  22feb
 figure(2),
-set(gcf,'Position',[200   300   900   220]);
+set(gcf,'Position',[200   300   900   440]);
+
+t = annotation('textbox','String','a)','Position',[0.02 0.85 0.1 0.1]);
+t.FontSize = 14; t.LineStyle='None';
+t = annotation('textbox','String','b)','Position',[0.36 0.85 0.1 0.1]);
+t.FontSize = 14; t.LineStyle='None';
+t = annotation('textbox','String','c)','Position',[0.64 0.85 0.1 0.1]);
+t.FontSize = 14; t.LineStyle='None';
+t = annotation('textbox','String','d)','Position',[0.02 0.42 0.1 0.1]);
+t.FontSize = 14; t.LineStyle='None';
+t = annotation('textbox','String','e)','Position',[0.36 0.42 0.1 0.1]);
+t.FontSize = 14; t.LineStyle='None';
+t = annotation('textbox','String','f)','Position',[0.64 0.42 0.1 0.1]);
+t.FontSize = 14; t.LineStyle='None';
+
+
 n=0
 for kkk=[1 2 5]
     n=n+1;
-    subplot(1,3,n), % vary B1 parameter
+    subplot(2,3,n), % vary B1 parameter
     
     clear B1 Rexb1 Dilution MTRb1
     B1=0.01:0.1:6;
@@ -120,9 +135,41 @@ for kkk=[1 2 5]
     plot(B1,alpha); hold on;
     plot(B1,Dilution); hold on;
     plot(B1,alpha.*Dilution); hold on;
+    title(sprintf('%s(%.1f ppm, k=%.0f s^{-1})',Psim.CESTPool(kkk).id, Psim.CESTPool(kkk).dw,Psim.CESTPool(kkk).k))
     legend({'\alpha','\sigma^\prime','\alpha\cdot\sigma^\prime'},'FontSize',10)
     xlabel('RF irradiation amplitude B_1 [µT]');
     if kkk==1
         ylabel({'labeling efficiency \alpha','spillover dilution \sigma'''});
     end
+    grid on;
+end
+
+
+for kkk=[1 2 5]
+    n=n+1;
+    subplot(2,3,n), % vary B1 parameter
+    
+    clear B1 Rexb1 Dilution MTRb1
+    B1=0.01:0.1:6;
+    P=Pstart;
+    for ii=1:numel(B1)
+        P.B1=B1(ii);
+        P.xZspec=Psim.CESTPool(kkk).dw;
+        Psimref=Psim;
+        Psimref.CESTPool(1).f=0;  Psimref.CESTPool(2).f=0;  Psimref.CESTPool(3).f=0; Psimref.CESTPool(4).f=0; Psimref.CESTPool(5).f=0;
+        [Z]=Z_cw_yaml(P,Psim);
+        [Zref]=Z_cw_yaml(P,Psimref);
+        MTRb1(ii)=Zref-Z;
+        Dilution(ii)= Zref^2;
+    end
+    hold all
+    w1=Psim.Scanner.Gamma*B1;
+    plot(B1,MTRb1); hold on; 
+    legend({'CESTR'},'FontSize',10)
+    ylim([0 0.1]);
+    xlabel('RF irradiation amplitude B_1 [µT]');
+    if kkk==1
+        ylabel({'CESTR'});
+    end
+    grid on;
 end
